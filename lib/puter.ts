@@ -58,10 +58,10 @@ interface PuterStore {
   fs: {
     write: (
       path: string,
-      data: string | File | Blob
+      data: string | File | Blob 
     ) => Promise<File | undefined>;
     read: (path: string) => Promise<Blob | undefined>;
-    upload: (file: File[] | Blob[]) => Promise<FSItem | undefined>;
+    upload: (file: File[] | Blob[] |any ) => Promise<FSItem | undefined>;
     delete: (path: string) => Promise<void>;
     readDir: (path: string) => Promise<FSItem[] | undefined>;
   };
@@ -350,7 +350,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      { model: "claude-sonnet-4" }
+      { model: "claude-3-7-sonnet" }
     ) as Promise<AIResponse | undefined>;
   };
 
