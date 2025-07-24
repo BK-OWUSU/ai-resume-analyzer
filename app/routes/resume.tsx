@@ -1,6 +1,9 @@
 import { usePuterStore } from "lib/puter"
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router"
+import ATS from "~/components/ATS";
+import Details from "~/components/Details";
+import Summary from "~/components/Summary";
 
 
 const resume = () => {
@@ -8,7 +11,7 @@ const resume = () => {
   const {id} = useParams();
   const [imageUrl, setImageUrl] = useState('')
   const [resumeUrl, setResumeUrl] = useState('')
-  const [feedback, setFeedback] = useState('')
+  const [feedback, setFeedback] = useState<Feedback | null>(null)
   const navigate = useNavigate();
 
    useEffect(()=> {
@@ -59,7 +62,9 @@ const resume = () => {
             <h2 className="text-4xl !text-black font-bold">Resume Review</h2>
             {feedback ? (
               <div className="flex flex-col gap-2">
-                Summary ATF Details 
+                <Summary feedback = {feedback}/>
+                <ATS score = {feedback.ATS.score || 0} suggestions = {feedback.padStart.tips || []}/>
+                <Details feedback = {feedback}/> 
               </div>
             ):(
               <img src="/images/resume-scan-2.gif" alt="resume-scan" className="w-full" />
