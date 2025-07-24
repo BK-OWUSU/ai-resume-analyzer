@@ -74,7 +74,8 @@ interface PuterStore {
     ) => Promise<AIResponse | undefined>;
     feedback: (
       path: string,
-      message: string
+      message: string,
+      testMode?: boolean,
     ) => Promise<AIResponse | undefined>;
     img2txt: (
       image: string | File | Blob,
@@ -350,7 +351,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      { model: "claude-3-7-sonnet" }
+      // { model: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"}
     ) as Promise<AIResponse | undefined>;
   };
 

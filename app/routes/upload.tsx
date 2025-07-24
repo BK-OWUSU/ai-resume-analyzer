@@ -32,7 +32,7 @@ const upload = () => {
         //Converting pdf to image
         const imageFile = await convertPdfToImage(file);
         //if there is no image file
-        if (!imageFile) return setStatusText("FError: ailed to convert PDF to Image");
+        if (!imageFile) return setStatusText("Error: ailed to convert PDF to Image");
         //Uploading the image
         setStatusText("Uploading the image");
         const uploadedImage = await fs.upload([imageFile.file])
@@ -54,19 +54,22 @@ const upload = () => {
         //ai
         const feedback = await ai.feedback(
             uploadedFile.path,
-            prepareInstructions({jobTitle,jobDescription})
+            prepareInstructions({jobTitle,jobDescription}),
+            true
         )
         //if analysis fail
         if(!feedback) return setStatusText("Error: Failed to analyze resume");
         const feedbackText = typeof feedback.message.content === 'string' 
         ? feedback.message.content
         : feedback.message.content[0].text
+        console.log("🧾 Raw feedbackText:", feedbackText);
         //Set the feedback to the data
         data.feedback = JSON.parse(feedbackText)
         //save data
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
         setStatusText("Analysis complete, redirecting")
-        console.log(data)
+        //Redirecting
+        navigate(`/resume/${uuid}`);
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
