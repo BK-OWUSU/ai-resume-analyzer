@@ -57,8 +57,13 @@ form {
     @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
   }
   .primary-button {
-    @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
+    @apply primary-gradient text-white rounded-[1rem] px-4 py-2 cursor-pointer w-full;
   }
+
+  .delete-button {
+    @apply delete-gradient text-white rounded-[1rem] px-4 py-2 cursor-pointer w-full
+  }
+
   .resume-nav {
     @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
   }
@@ -130,6 +135,11 @@ form {
 
 @utility primary-gradient {
   background: linear-gradient(to bottom, #8e98ff, #606beb);
+  box-shadow: 0px 74px 21px 0px #6678ef00;
+}
+
+@utility delete-gradient {
+  background: linear-gradient(to bottom, #8e98ff, #fa7185cc);
   box-shadow: 0px 74px 21px 0px #6678ef00;
 }
 
